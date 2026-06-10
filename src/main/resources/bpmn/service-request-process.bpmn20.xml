@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions xmlns="http://www.omg.org/spec/BPMN/20100524/MODEL" targetNamespace="http://flowable.org/bpmn/service-request">
+    <process id="serviceRequestProcess" name="Service Request Workflow" isExecutable="true">
+        <startEvent id="submitRequest" name="Submit Request"><outgoing>flow1</outgoing></startEvent>
+        <userTask id="triageTask" name="Triage Request"><incoming>flow1</incoming><outgoing>flow2</outgoing></userTask>
+        <userTask id="assignTask" name="Assign to Operator"><incoming>flow2</incoming><outgoing>flow3</outgoing></userTask>
+        <userTask id="workTask" name="Work on Request"><incoming>flow3</incoming><outgoing>flow4</outgoing></userTask>
+        <exclusiveGateway id="approvalGateway" name="Approval Required?"><incoming>flow4</incoming><outgoing>flowReview</outgoing><outgoing>flowComplete</outgoing></exclusiveGateway>
+        <userTask id="reviewTask" name="Review and Approve"><incoming>flowReview</incoming><outgoing>flowApprovalDecision</outgoing></userTask>
+        <exclusiveGateway id="approvalDecision" name="Approved?"><incoming>flowApprovalDecision</incoming><outgoing>flowApproved</outgoing><outgoing>flowRejected</outgoing></exclusiveGateway>
+        <endEvent id="completeEvent" name="Complete"><incoming>flowApproved</incoming><incoming>flowComplete</incoming></endEvent>
+        <sequenceFlow id="flow1" sourceRef="submitRequest" targetRef="triageTask"/>
+        <sequenceFlow id="flow2" sourceRef="triageTask" targetRef="assignTask"/>
+        <sequenceFlow id="flow3" sourceRef="assignTask" targetRef="workTask"/>
+        <sequenceFlow id="flow4" sourceRef="workTask" targetRef="approvalGateway"/>
+        <sequenceFlow id="flowReview" sourceRef="approvalGateway" targetRef="reviewTask"><conditionExpression>${approvalNeeded}</conditionExpression></sequenceFlow>
+        <sequenceFlow id="flowComplete" sourceRef="approvalGateway" targetRef="completeEvent"><conditionExpression>${not approvalNeeded}</conditionExpression></sequenceFlow>
+        <sequenceFlow id="flowApprovalDecision" sourceRef="reviewTask" targetRef="approvalDecision"/>
+        <sequenceFlow id="flowApproved" sourceRef="approvalDecision" targetRef="completeEvent"><conditionExpression>${approved}</conditionExpression></sequenceFlow>
+        <sequenceFlow id="flowRejected" sourceRef="approvalDecision" targetRef="triageTask"><conditionExpression>${not approved}</conditionExpression></sequenceFlow>
+    </process>
+</definitions>
