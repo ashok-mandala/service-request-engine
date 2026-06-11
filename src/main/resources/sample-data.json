@@ -1,0 +1,181 @@
+{
+  "operators": [
+    {
+      "id": "op-1",
+      "name": "Alice Operator",
+      "email": "alice@example.com",
+      "skills": "network,hardware",
+      "load": 1,
+      "available": true,
+      "maxCapacity": 5
+    },
+    {
+      "id": "op-2",
+      "name": "Bob Operator",
+      "email": "bob@example.com",
+      "skills": "software,database",
+      "load": 0,
+      "available": true,
+      "maxCapacity": 4
+    },
+    {
+      "id": "op-3",
+      "name": "Carol Operator",
+      "email": "carol@example.com",
+      "skills": "security,network",
+      "load": 3,
+      "available": true,
+      "maxCapacity": 3
+    },
+    {
+      "id": "op-4",
+      "name": "Dave Operator",
+      "email": "dave@example.com",
+      "skills": "hardware,software",
+      "load": 5,
+      "available": false,
+      "maxCapacity": 5
+    },
+    {
+      "id": "op-5",
+      "name": "Eve Operator",
+      "email": "eve@example.com",
+      "skills": "database,devops",
+      "load": 2,
+      "available": true,
+      "maxCapacity": 6
+    }
+  ],
+  "serviceRequests": [
+    {
+      "id": "00000000-0000-0000-0000-000000000001",
+      "type": "INCIDENT",
+      "priority": "HIGH",
+      "sensitivity": false,
+      "state": "SUBMITTED",
+      "title": "Cannot access VPN",
+      "description": "User reports VPN connectivity issues",
+      "requesterEmail": "user1@example.com",
+      "approvalNeeded": false
+    },
+    {
+      "id": "00000000-0000-0000-0000-000000000002",
+      "type": "REQUEST",
+      "priority": "LOW",
+      "sensitivity": false,
+      "state": "TRIAGE",
+      "title": "Request for new mouse",
+      "description": "User requests a new ergonomic mouse",
+      "requesterEmail": "user2@example.com",
+      "approvalNeeded": false
+    },
+    {
+      "id": "00000000-0000-0000-0000-000000000003",
+      "type": "CHANGE",
+      "priority": "CRITICAL",
+      "sensitivity": true,
+      "state": "ASSIGN",
+      "title": "Production DB patch",
+      "description": "Apply critical security patch to production DB",
+      "requesterEmail": "sre@example.com",
+      "approvalNeeded": true,
+      "approved": false,
+      "currentOperatorId": "op-5",
+      "assignedAt": "2026-06-10T09:30:00",
+      "escalationCount": 1
+    },
+    {
+      "id": "00000000-0000-0000-0000-000000000004",
+      "type": "INCIDENT",
+      "priority": "MEDIUM",
+      "sensitivity": false,
+      "state": "WORK",
+      "title": "Intermittent database errors",
+      "description": "Database queries failing intermittently",
+      "requesterEmail": "user3@example.com",
+      "approvalNeeded": false,
+      "currentOperatorId": "op-3",
+      "assignedAt": "2026-06-09T14:00:00"
+    },
+    {
+      "id": "00000000-0000-0000-0000-000000000005",
+      "type": "REQUEST",
+      "priority": "HIGH",
+      "sensitivity": true,
+      "state": "REVIEW",
+      "title": "Access to production logs",
+      "description": "Request for temporary access to production logs",
+      "requesterEmail": "auditor@example.com",
+      "approvalNeeded": true,
+      "approved": true,
+      "approvedAt": "2026-06-10T11:15:00",
+      "currentOperatorId": "op-2",
+      "assignedAt": "2026-06-10T10:00:00",
+      "resolution": "Approved for 24 hours",
+      "completedAt": null
+    },
+    {
+      "id": "00000000-0000-0000-0000-000000000006",
+      "type": "INCIDENT",
+      "priority": "CRITICAL",
+      "sensitivity": true,
+      "state": "COMPLETE",
+      "title": "Production outage",
+      "description": "All users unable to reach service",
+      "requesterEmail": "ops@example.com",
+      "approvalNeeded": false,
+      "currentOperatorId": "op-1",
+      "assignedAt": "2026-06-08T01:00:00",
+      "completedAt": "2026-06-08T03:20:00",
+      "resolution": "Rollback deployed release and restore service"
+    },
+    {
+      "id": "00000000-0000-0000-0000-000000000007",
+      "type": "REQUEST",
+      "priority": "LOW",
+      "sensitivity": false,
+      "state": "REJECTED",
+      "title": "Change wallpaper on desktop",
+      "description": "User requested change that was denied",
+      "requesterEmail": "user4@example.com",
+      "approvalNeeded": false,
+      "resolution": "Rejected due to policy"
+    },
+    {
+      "id": "00000000-0000-0000-0000-000000000008",
+      "type": "CHANGE",
+      "priority": "MEDIUM",
+      "sensitivity": false,
+      "state": "TRIAGE",
+      "title": "Upgrade monitoring agent",
+      "description": "Upgrade agent to the latest stable release",
+      "requesterEmail": "infra@example.com",
+      "approvalNeeded": false
+    },
+    {
+      "id": "00000000-0000-0000-0000-000000000009",
+      "type": "INCIDENT",
+      "priority": "HIGH",
+      "sensitivity": false,
+      "state": "ASSIGN",
+      "title": "Email delivery failures",
+      "description": "Outbound emails bouncing for a subset of users",
+      "requesterEmail": "reports@example.com",
+      "approvalNeeded": false,
+      "currentOperatorId": "op-4",
+      "assignedAt": "2026-06-11T07:45:00"
+    },
+    {
+      "id": "00000000-0000-0000-0000-000000000010",
+      "type": "REQUEST",
+      "priority": "MEDIUM",
+      "sensitivity": false,
+      "state": "WORK",
+      "title": "Provision test environment",
+      "description": "Create a sandbox environment for QA",
+      "requesterEmail": "qa@example.com",
+      "approvalNeeded": true,
+      "approved": false
+    }
+  ]
+}

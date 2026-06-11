@@ -22,13 +22,22 @@ public class AssignmentService {
     public Operator assignRequest(ServiceRequest request, AssignmentStrategy strategy) {
         List<Operator> available = getAvailableOperators();
         if (available.isEmpty()) return null;
-
-        return switch (strategy) {
-            case SKILL_LOAD_BALANCE -> findBySkillLoadBalance(request.getType().name(), available);
-            case ROUND_ROBIN -> findByLeastLoaded(available);
-            case LEAST_LOADED -> findByLeastLoaded(available);
-            case FIRST_AVAILABLE -> findFirstAvailable(request.getType().name(), available);
+        Operator result = null;
+        switch (strategy) {
+            case SKILL_LOAD_BALANCE:
+                result = findBySkillLoadBalance(request.getType().name(), available);
+                break;
+            case ROUND_ROBIN:
+            case LEAST_LOADED:
+                result = findByLeastLoaded(available);
+                break;
+            case FIRST_AVAILABLE:
+                result = findFirstAvailable(request.getType().name(), available);
+                break;
+            default:
+                log.warn("Unknown assignment strategy: {}", strategy);
         };
+        return result;
     }
 
     private Operator findBySkillLoadBalance(String requestType, List<Operator> available) {

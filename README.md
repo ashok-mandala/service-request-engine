@@ -14,6 +14,51 @@ mvn spring-boot:run
 Server: http://localhost:8080  
 H2 Console: http://localhost:8080/h2-console
 
+## Open the docs
+
+After the application starts the API docs are available at these URIs (default port 8080):
+
+- OpenAPI JSON: `http://localhost:8080/v3/api-docs`
+- Swagger UI (interactive): `http://localhost:8080/swagger-ui/index.html`
+
+If you run the app on a different port replace `8080` with the chosen port (for example `http://localhost:8081/swagger-ui/index.html`).
+
+Example: GET /api/operators (seeded sample data)
+
+Request:
+
+```bash
+GET http://localhost:8080/api/operators
+```
+
+Example response (200 OK):
+
+```json
+{
+  "total": 2,
+  "operators": [
+    {
+      "id": "op-1",
+      "name": "Alice Operator",
+      "email": "alice@example.com",
+      "skills": ["network","hardware"],
+      "load": 1,
+      "available": true,
+      "maxCapacity": 5
+    },
+    {
+      "id": "op-2",
+      "name": "Bob Operator",
+      "email": "bob@example.com",
+      "skills": ["software","database"],
+      "load": 0,
+      "available": true,
+      "maxCapacity": 4
+    }
+  ]
+}
+```
+
 ## Key Features
 
 - BPMN Workflow Engine (Flowable 6.7.2)
